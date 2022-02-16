@@ -10,6 +10,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
+/**
+ * Author: Amicle
+ */
 public class SearchResults extends BaseSteps {
 
     /**

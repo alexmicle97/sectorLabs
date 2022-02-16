@@ -34,6 +34,8 @@ public class HomePage extends BaseSteps {
     @FindBy(css = "#body-wrapper > main:nth-child(3) > div:nth-child(5)")
     WebElement main;
 
+    @FindBy(css = "body > div:nth-child(3) > main:nth-child(3) > div:nth-child(5) > div:nth-child(1) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(3)")
+    WebElement expandSearches;
 
     /**
      * HomePage constructor for initializing the page web elements.
@@ -95,6 +97,13 @@ public class HomePage extends BaseSteps {
     }
 
     /**
+     * method used to expand the popular searches(click on view all).
+     */
+    public void setExpandDubaiPopularSearches() {
+        waitUntilElementIsClickableAndClickByXpath("/html/body/div[2]/main/div[5]/div/div[2]/div[1]/div[2]/div/div[1]/div[2]");
+    }
+
+    /**
      * @param xpath path of the web element for identifying it's position.
      */
     public void waitUntilElementIsVisibleByXpath(String xpath) {
@@ -147,5 +156,6 @@ public class HomePage extends BaseSteps {
      */
     public void clickOnRentButton() {
         rentButton.click();
+
     }
 }

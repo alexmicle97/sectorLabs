@@ -9,6 +9,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.jodah.failsafe.internal.util.Assert;
 
+/**
+ * Author: Amicle
+ */
 public class Steps extends BaseSteps {
     public HomePage homePage;
     public SearchResults searchResults;
@@ -74,5 +77,10 @@ public class Steps extends BaseSteps {
     @When("the user clicks on rent button")
     public void theUserClicksOnRentButton() throws InterruptedException {
         homePage.clickOnRentButton();
+    }
+
+    @And("the popular searches are expanded")
+    public void thePopularSearchesAreExpanded() {
+        homePage.setExpandDubaiPopularSearches();
     }
 }

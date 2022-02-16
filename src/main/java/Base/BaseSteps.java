@@ -15,14 +15,14 @@ import java.util.Properties;
 
 public class BaseSteps {
 
-public static WebDriver driver;
-public static Properties properties;
+    public static WebDriver driver;
+    public static Properties properties;
 
     /**
      * Base step class constructor for reading the configuration files for the driver
      */
     public BaseSteps() {
-        try{
+        try {
             properties = new Properties();
             FileInputStream inputStream = new FileInputStream("C:\\Users\\Alex\\IdeaProjects\\sectorLabs\\src\\main\\java\\configuration\\config.properties");
             properties.load(inputStream);
@@ -37,11 +37,11 @@ public static Properties properties;
     public void initializeDriver() throws InterruptedException {
         String browserName = properties.getProperty("browser");
         System.out.println(browserName);
-        if(browserName.equals(properties.getProperty("browser"))){
+        if (browserName.equals(properties.getProperty("browser"))) {
             System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
             driver = new ChromeDriver();
         }
-         if(browserName.equals("firefox")) {
+        if (browserName.equals("firefox")) {
             System.setProperty("webdriver.gecko.driver", "C:\\Users\\Alex\\IdeaProjects\\sectorLabs\\driver\\geckodriver.exe");
             driver = new FirefoxDriver();
         }
