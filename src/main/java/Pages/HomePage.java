@@ -2,45 +2,49 @@ package Pages;
 
 import Base.BaseSteps;
 import io.cucumber.java.en_old.Ac;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
+import java.util.List;
 
 /**
  * author: Amicle
  */
 public class HomePage extends BaseSteps {
 
-    @FindBy(xpath ="/html/body/div[2]/header/div[4]/div/div[2]/div/div[1]/div[2]/div/div/ul/input")
+    private static Logger LOGGER = LoggerFactory.getLogger(HomePage.class);
+
+    @FindBy(xpath = "/html/body/div[2]/header/div[4]/div/div[2]/div/div[1]/div[2]/div/div/ul/input")
 
     WebElement location;
 
     @FindBy(xpath = "(//*[name()='path'][@class='cls-1'])[1]")
     WebElement purpose;
 
-    @FindBy(xpath = "/html/body/div[2]/header/div[4]/div/div[2]/div/div[2]/a")
-    WebElement searchButton;
+    @FindBy(xpath = "/html/body/div[2]/main/div[5]/div/div[2]/div[2]/div/div/div[2]")
+    WebElement rentButton;
+
+    @FindBy(css = "#body-wrapper > main:nth-child(3) > div:nth-child(5)")
+    WebElement main;
 
 
     /**
      * HomePage constructor for initializing the page web elements.
      */
     public HomePage() {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
 
     /**
-     *
      * @param location used for storing the location name.
-     * method used to inserting the location text passed by the user into the location web element.
+     *                 method used to inserting the location text passed by the user into the location web element.
      */
     public void typeLocation(String location) throws InterruptedException {
         waitUntilElementIsVisible(this.location);
@@ -50,9 +54,8 @@ public class HomePage extends BaseSteps {
     }
 
     /**
-     *
      * @param purpose used to determine if the property is for rent or buy.
-     * method used for selecting from the listbox the property passed by the user.
+     *                method used for selecting from the listbox the property passed by the user.
      */
     public void selectPurpose(String purpose) {
         waitUntilElementIsClickable(this.purpose);
@@ -64,10 +67,11 @@ public class HomePage extends BaseSteps {
 
     /**
      * method used to wait until an element is visible on the page.
+     *
      * @param webElement the web element passed in order to wait for its visibility.
      */
 
-    public void waitUntilElementIsVisible(WebElement webElement){
+    public void waitUntilElementIsVisible(WebElement webElement) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
@@ -75,27 +79,73 @@ public class HomePage extends BaseSteps {
     /**
      * @param element used to wait until the element passed is clickable.
      */
-    public void waitUntilElementIsClickable(WebElement element){
+    public void waitUntilElementIsClickable(WebElement element) {
         Actions builder = new Actions(driver);
         builder.click(element).build().perform();
     }
 
+
     /**
-     *
      * @param xpath string passed as xpath.
-     * method used to wait until the passed xpath element is clickable.
+     *              method used to wait until the passed xpath element is clickable.
      */
-    public void waitUntilElementIsClickableAndClick(String xpath){
+    public void waitUntilElementIsClickableAndClickByXpath(String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
     }
 
     /**
+     * @param xpath path of the web element for identifying it's position.
+     */
+    public void waitUntilElementIsVisibleByXpath(String xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+    }
+
+    /**
      * method used for clicking the find button from the home page.
+     *
      * @return the SearchResults page.
      */
-    public SearchResults search(){
-        waitUntilElementIsClickableAndClick("/html/body/div[4]/header/div[4]/div/div[2]/div/div[2]/a");
+    public SearchResults search() {
+        waitUntilElementIsClickableAndClickByXpath("/html/body/div[4]/header/div[4]/div/div[2]/div/div[2]/a");
         return new SearchResults();
+    }
+
+    /**
+     * Method used to scroll down until main tag is visible.
+     */
+    public void scrollDownToPopularSearches() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", main);
+        waitUntilElementIsVisible(main);
+    }
+
+    /**
+     * Method used to wait until the popular searches section is visible
+     */
+    public void waitUntilPopularSearchesIsVisible() {
+        waitUntilElementIsVisibleByXpath("/html/body/div[2]/main/div[5]/div/div[2]/div[1]/div[1]/div");
+    }
+
+    /**
+     * @param link name of the link to be clicked
+     * @return after click a new searchResult page, as the page is changed by click.
+     */
+    public SearchResults retrievePopularSearchesLinksAndClickOnUserInputLink(String link) {
+        List<WebElement> popularSearches = driver.findElements(By.xpath("/html/body/div[2]/main/div[5]/div/div[2]/div[1]/div[2]/div/div//li/a"));
+        for (WebElement element : popularSearches) {
+            if (element.getText().equals(link)) {
+                element.click();
+                break;
+            }
+        }
+        return new SearchResults();
+    }
+
+    /**
+     * Method used to click on rent button.
+     */
+    public void clickOnRentButton() {
+        rentButton.click();
     }
 }

@@ -29,7 +29,6 @@ public class SearchResults extends BaseSteps {
 
 
     /**
-     *
      * @returns a list of web elements.
      */
     public List<WebElement> getAllArticlesFromCurrentPage() {
@@ -37,7 +36,6 @@ public class SearchResults extends BaseSteps {
     }
 
     /**
-     *
      * @param expectedResult used to compare the text from the web element with the text passed by the user.
      * @return true or false depending if the text matches with what user inputs.
      */

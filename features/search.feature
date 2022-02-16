@@ -5,3 +5,4 @@ Feature:
     Then the "sale" option is selected
     When the search button is pressed
     And the list of articles is retrieved and check if all contains "Dubai Marina"
+    Then the browser is closed

@@ -36,13 +36,13 @@ public static Properties properties;
      */
     public void initializeDriver() throws InterruptedException {
         String browserName = properties.getProperty("browser");
-
+        System.out.println(browserName);
         if(browserName.equals(properties.getProperty("browser"))){
             System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
             driver = new ChromeDriver();
         }
-        else if(browserName.equals("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "driver/geckodriver.exe");
+         if(browserName.equals("firefox")) {
+            System.setProperty("webdriver.gecko.driver", "C:\\Users\\Alex\\IdeaProjects\\sectorLabs\\driver\\geckodriver.exe");
             driver = new FirefoxDriver();
         }
 
