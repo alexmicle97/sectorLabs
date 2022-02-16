@@ -60,7 +60,7 @@ public class HomePage extends BaseSteps {
      *                method used for selecting from the listbox the property passed by the user.
      */
     public void selectPurpose(String purpose) {
-        waitUntilElementIsClickable(this.purpose);
+        clickOnWebElementUsingAction(this.purpose);
         WebElement buy = driver.findElement(By.xpath("/html/body/div[3]/header/div[4]/div/div[2]/div/div[1]/div[1]/div/div[2]/div/div[1]/div/span[1]/button"));
         WebElement rent = driver.findElement(By.xpath("/html/body/div[3]/header/div[4]/div/div[2]/div/div[1]/div[1]/div/div[2]/div/div[1]/div/span[2]/button"));
         if (purpose.equals("rent")) rent.click();
@@ -79,9 +79,9 @@ public class HomePage extends BaseSteps {
     }
 
     /**
-     * @param element used to wait until the element passed is clickable.
+     * @param element used to click the passed element.
      */
-    public void waitUntilElementIsClickable(WebElement element) {
+    public void clickOnWebElementUsingAction(WebElement element) {
         Actions builder = new Actions(driver);
         builder.click(element).build().perform();
     }
@@ -89,7 +89,7 @@ public class HomePage extends BaseSteps {
 
     /**
      * @param xpath string passed as xpath.
-     *              method used to wait until the passed xpath element is clickable.
+     * method used to wait until the passed xpath element is clickable.
      */
     public void waitUntilElementIsClickableAndClickByXpath(String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
