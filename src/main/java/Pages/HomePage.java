@@ -73,7 +73,7 @@ public class HomePage extends BaseSteps {
      * @param webElement the web element passed in order to wait for its visibility.
      */
 
-    public void waitUntilElementIsVisible(WebElement webElement) {
+    private void waitUntilElementIsVisible(WebElement webElement) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
@@ -81,7 +81,7 @@ public class HomePage extends BaseSteps {
     /**
      * @param element used to click the passed element.
      */
-    public void clickOnWebElementUsingAction(WebElement element) {
+    private void clickOnWebElementUsingAction(WebElement element) {
         Actions builder = new Actions(driver);
         builder.click(element).build().perform();
     }
@@ -91,7 +91,7 @@ public class HomePage extends BaseSteps {
      * @param xpath string passed as xpath.
      * method used to wait until the passed xpath element is clickable.
      */
-    public void waitUntilElementIsClickableAndClickByXpath(String xpath) {
+    private void waitUntilElementIsClickableAndClickByXpath(String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath))).click();
     }
@@ -106,7 +106,7 @@ public class HomePage extends BaseSteps {
     /**
      * @param xpath path of the web element for identifying it's position.
      */
-    public void waitUntilElementIsVisibleByXpath(String xpath) {
+    private void waitUntilElementIsVisibleByXpath(String xpath) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
     }

@@ -34,7 +34,7 @@ public class SearchResults extends BaseSteps {
     /**
      * @returns a list of web elements.
      */
-    public List<WebElement> getAllArticlesFromCurrentPage() {
+    private List<WebElement> getAllArticlesFromCurrentPage() {
         return articleUl.findElements(By.xpath("//li[@aria-label='Listing']//div[@aria-label='Location']"));
     }
 
