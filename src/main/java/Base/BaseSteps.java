@@ -24,7 +24,7 @@ public class BaseSteps {
     public BaseSteps() {
         try {
             properties = new Properties();
-            FileInputStream inputStream = new FileInputStream("C:\\Users\\Alex\\IdeaProjects\\sectorLabs\\src\\main\\java\\configuration\\config.properties");
+            FileInputStream inputStream = new FileInputStream(System.getProperty("user.dir")+ "\\src\\main\\java\\configuration\\config.properties");
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
@@ -38,11 +38,11 @@ public class BaseSteps {
         String browserName = properties.getProperty("browser");
         System.out.println(browserName);
         if (browserName.equals(properties.getProperty("browser"))) {
-            System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+ "\\driver\\chromedriver.exe");
             driver = new ChromeDriver();
         }
         if (browserName.equals("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "C:\\Users\\Alex\\IdeaProjects\\sectorLabs\\driver\\geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+ "\\driver\\geckodriver.exe");
             driver = new FirefoxDriver();
         }
 
